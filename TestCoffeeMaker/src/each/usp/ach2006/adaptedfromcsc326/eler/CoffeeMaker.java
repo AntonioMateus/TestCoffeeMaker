@@ -78,7 +78,8 @@ public class CoffeeMaker {
 	}
 	
 	public synchronized void addSugarInventory(int amtSugar) throws InvalidValueException {
-		inventory.addChocolate(amtSugar); 
+//Erro: inventory.addChocolate(amtSugar);
+		inventory.addSugar(amtSugar);
 	}
 	
 	public synchronized void addChocolateInventory(int amtChocolate) throws InvalidValueException {
@@ -109,9 +110,9 @@ public class CoffeeMaker {
      * @param amtPaid
      * @return int
      */
-    public synchronized int makeCoffee(String recipeName, int amtPaid) throws 
-    	InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException {    	
-    	if (amtPaid<0 && amtPaid>500){ //POSSIVEL ERRO <- AGUARDANDO CONFIRMACAO DO PROFESSOR
+    public synchronized int makeCoffee(String recipeName, int amtPaid) throws InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException {    	
+//Erro:    	if (amtPaid<0 && amtPaid>500){
+    	if (amtPaid<0 || amtPaid>500){
     		throw new InvalidValueException("Payment must be positive or less than 500 cents");
     	}
         int change = 0;
