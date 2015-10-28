@@ -18,6 +18,11 @@ public class RecipeTest {
 	}
 	
 	/* Testes para construtor - INICIO*/
+	@Test (expected = InvalidValueException.class) 
+	public void testeNomeNulo() throws InvalidValueException{
+		Recipe receita = new Recipe(null,50,4,3,1,5);
+	}
+	
 	@Test (expected = InvalidValueException.class)
 	public void testeNomeVazio() throws InvalidValueException {
 		/* Classe de equivalencia: C2, C3, C4, C5, C6, C7, C8
