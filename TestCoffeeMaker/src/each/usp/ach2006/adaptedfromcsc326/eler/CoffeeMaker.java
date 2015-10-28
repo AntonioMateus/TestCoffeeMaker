@@ -78,7 +78,8 @@ public class CoffeeMaker {
 	}
 	
 	public synchronized void addSugarInventory(int amtSugar) throws InvalidValueException {
-		inventory.addChocolate(amtSugar); 
+//Erro: inventory.addChocolate(amtSugar);
+		inventory.addSugar(amtSugar);
 	}
 	
 	public synchronized void addChocolateInventory(int amtChocolate) throws InvalidValueException {
