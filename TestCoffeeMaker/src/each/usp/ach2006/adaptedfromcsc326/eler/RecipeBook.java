@@ -42,7 +42,8 @@ public class RecipeBook {
 	
 	public synchronized boolean addRecipe(Recipe r) throws DuplicatedRecipeException, AmountOfRecipeException{
 		
-		if (recipeArray.size()>3){ 
+//Erro:	if (recipeArray.size() > 3){
+		if (recipeArray.size()>=3){
 			recipeArray.add(r);
 			throw new AmountOfRecipeException("Number of recipes exceeded");
 		}
@@ -77,7 +78,8 @@ public class RecipeBook {
 			}				
 		}
 		
-		if (recipeToDelete>0){ 
+//Erro:	if (recipeToDelete>0){
+		if (recipeToDelete>=0){
 			recipeArray.remove(recipeToDelete);
 			return true;
 		}
