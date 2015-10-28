@@ -78,7 +78,8 @@ public class RecipeBook {
 			}				
 		}
 		
-		if (recipeToDelete>0){ 
+//Erro:	if (recipeToDelete>0){
+		if (recipeToDelete>=0){
 			recipeArray.remove(recipeToDelete);
 			return true;
 		}
