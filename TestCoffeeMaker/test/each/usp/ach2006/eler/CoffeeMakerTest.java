@@ -191,7 +191,8 @@ public class CoffeeMakerTest {
 		 * Valor-limite: v1, v5 */
 		
 		CM.addCoffeeInventory(100-CM.checkCoffeeInventory());
-		int qtdCafe = CM.checkChocolateInventory();
+//Erro: int qtdCafe = CM.checkChocolateInventory();
+		int qtdCafe = CM.checkCoffeeInventory();
 		assertEquals(100, qtdCafe);
 	}
 	

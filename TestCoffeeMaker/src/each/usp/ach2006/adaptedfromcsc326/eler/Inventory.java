@@ -58,8 +58,9 @@ public class Inventory {
      * @throws InventoryException
      */
     public synchronized void addChocolate(int amtChocolate) throws InvalidValueException{    	    
-		if (amtChocolate >= 0 && amtChocolate+this.chocolate<100) {
-			this.chocolate += amtChocolate;
+//Erro:	if (amtChocolate >= 0 && amtChocolate+this.chocolate<100) {
+    	if (amtChocolate >= 0 && amtChocolate+this.chocolate<=100) {
+    		this.chocolate += amtChocolate;
 		} else {
 			throw new InvalidValueException("Units of chocolate must be a positive integer and less equal than 100");
 		}
