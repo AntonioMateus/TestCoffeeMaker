@@ -111,8 +111,7 @@ public class CoffeeMaker {
      */
     public synchronized int makeCoffee(String recipeName, int amtPaid) throws 
     	InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException {    	
-//Erro:	if (amtPaid<0 && amtPaid>500){
-    	if (amtPaid<0 || amtPaid>500){
+    	if (amtPaid<0 && amtPaid>500){ //POSSIVEL ERRO <- AGUARDANDO CONFIRMACAO DO PROFESSOR
     		throw new InvalidValueException("Payment must be positive or less than 500 cents");
     	}
         int change = 0;
