@@ -181,10 +181,12 @@ public class Inventory {
      */
     protected synchronized boolean enoughIngredients(Recipe r) {
         boolean isEnough = true;       
+        
         if(this.coffee < r.getAmtCoffee()) {
             isEnough = false;
         }
-        if(this.milk <= r.getAmtMilk()) {
+//Erro:	if(this.milk <= r.getAmtMilk()) {
+        if(this.milk < r.getAmtMilk()) {
             isEnough = false;
         }
         if(this.sugar < r.getAmtSugar()) {
@@ -193,6 +195,7 @@ public class Inventory {
         if(this.chocolate < r.getAmtChocolate()) {
             isEnough = false;
         }
+        
         return isEnough;
     }
     
@@ -206,7 +209,8 @@ public class Inventory {
     	if (enoughIngredients(r)) {
     		this.coffee -= r.getAmtCoffee();
     		this.milk -= r.getAmtMilk();
-    		this.sugar = r.getAmtSugar();
+//Erro:		this.sugar = r.getAmtSugar();
+    		this.sugar -= r.getAmtSugar();
     		this.chocolate -= r.getAmtChocolate();
 	    	return true;
     	} else {

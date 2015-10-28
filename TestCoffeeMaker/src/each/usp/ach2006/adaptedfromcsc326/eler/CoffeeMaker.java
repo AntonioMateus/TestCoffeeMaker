@@ -110,7 +110,8 @@ public class CoffeeMaker {
      * @return int
      */
     public synchronized int makeCoffee(String recipeName, int amtPaid) throws InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException {    	
-    	if (amtPaid<0 && amtPaid>500){
+//Erro:    	if (amtPaid<0 && amtPaid>500){
+    	if (amtPaid<0 || amtPaid>500){
     		throw new InvalidValueException("Payment must be positive or less than 500 cents");
     	}
         int change = 0;
@@ -119,10 +120,12 @@ public class CoffeeMaker {
         	change = amtPaid;
         	throw new RecipeException("Unknown Recipe");
         } else 
-        	if (recipe.getPrice() < amtPaid) {
+//Erro:		if (recipe.getPrice() < amtPaid) {
+        	if (recipe.getPrice() <= amtPaid) {
         		if (inventory.useIngredients(recipe)) {
-        			change = recipe.getPrice();
-        		} 
+//Erro:				change = recipe.getPrice();
+        			change = amtPaid-recipe.getPrice();
+        		}
         		else 
         		{
         			change = amtPaid;
