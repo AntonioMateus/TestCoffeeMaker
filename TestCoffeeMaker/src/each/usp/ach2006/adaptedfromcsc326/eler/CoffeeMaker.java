@@ -146,5 +146,5 @@ public class CoffeeMaker {
 	 */
 	public synchronized Vector<Recipe> getRecipes() {
 		return recipeBook.getRecipes();
-	}
+	} 
 }
