@@ -110,8 +110,9 @@ public class CoffeeMaker {
      * @param amtPaid
      * @return int
      */
-    public synchronized int makeCoffee(String recipeName, int amtPaid) throws InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException {    	
-//Erro:    	if (amtPaid<0 && amtPaid>500){
+    public synchronized int makeCoffee(String recipeName, int amtPaid) throws 
+    	InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException {    	
+//Erro:	if (amtPaid<0 && amtPaid>500){
     	if (amtPaid<0 || amtPaid>500){
     		throw new InvalidValueException("Payment must be positive or less than 500 cents");
     	}
@@ -146,5 +147,5 @@ public class CoffeeMaker {
 	 */
 	public synchronized Vector<Recipe> getRecipes() {
 		return recipeBook.getRecipes();
-	}
+	} 
 }
