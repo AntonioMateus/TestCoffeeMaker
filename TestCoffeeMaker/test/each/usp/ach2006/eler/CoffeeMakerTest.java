@@ -1,9 +1,11 @@
 package each.usp.ach2006.eler;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Vector;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import each.usp.ach2006.adaptedfromcsc326.eler.CoffeeMaker;
@@ -14,9 +16,6 @@ import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InsufficientAmountOfMo
 import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InvalidValueException;
 import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InventoryException;
 import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.RecipeException;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * 
@@ -356,12 +355,21 @@ public class CoffeeMakerTest {
 
 	@Test (expected = InsufficientAmountOfMoneyException.class)
 	public void testaFazerCafeDinheiroInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
-		/* Classe de equivalencia: C13, C33, C14, C15, C16, C17
+		/* Classe de equivalencia: C13, C33, C15, C16, C17, C18
 		 * Valor-limite: v30 */
 		
 		CM.addRecipe(receitaValida1);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()-1);			
 		assertEquals(CM.getRecipes().get(0).getPrice()-1, troco);
+	}
+	
+	@Test (expected = InvalidValueException.class)
+	public void testaFazerCafeDinheiroNegativo() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+		/* Classe de equivalencia: C13, C33, C15, C16, C17, C18
+		 * Valor-limite: amtPaid < 0 */
+		
+		CM.addRecipe(receitaValida1);
+		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), -1);
 	}
 	
 	@Test (expected = RecipeException.class)
