@@ -462,6 +462,26 @@ public class CoffeeMakerTest {
 		assertEquals(CM.getRecipes().get(0).getPrice()+1, troco);
 	}
 
+	@Test
+	public void testaFazerCafeConsumoInventorio() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+		/* Classe de equivalencia: C13, C14, C15, C16, C17, C18
+		 * Valor-limite: - */
+
+		Recipe receitaUnitaria = new Recipe("Teste Unidades", 1, 1, 1, 1, 1);
+		int cafeInicial = CM.checkCoffeeInventory();
+		int leiteInicial = CM.checkMilkInventory();
+		int acucarInicial = CM.checkSugarInventory();
+		int chocolateInicial = CM.checkChocolateInventory();
+		
+		CM.addRecipe(receitaUnitaria);
+		CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
+		
+		assertEquals(cafeInicial-CM.getRecipes().get(0).getAmtCoffee(), CM.checkCoffeeInventory());
+		assertEquals(leiteInicial-CM.getRecipes().get(0).getAmtMilk(), CM.checkMilkInventory());
+		assertEquals(acucarInicial-CM.getRecipes().get(0).getAmtSugar(), CM.checkSugarInventory());
+		assertEquals(chocolateInicial-CM.getRecipes().get(0).getAmtChocolate(), CM.checkChocolateInventory());
+	}
+	
 	/* Testes para makeCoffee - FIM */
 	
 	
