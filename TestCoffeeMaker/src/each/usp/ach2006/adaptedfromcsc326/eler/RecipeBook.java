@@ -44,7 +44,7 @@ public class RecipeBook {
 		
 //Erro:	if (recipeArray.size() > 3){
 		if (recipeArray.size()>=3){
-			recipeArray.add(r);
+//Erro: 	recipeArray.add(r);
 			throw new AmountOfRecipeException("Number of recipes exceeded");
 		}
 	
