@@ -134,6 +134,22 @@ public class CoffeeMakerTest {
 		assertEquals(false, ok);
 	}
 	
+	@Test
+	public void testaInsereQuatroReceitasEVerificaNumeroReceitasInseridas () throws DuplicatedRecipeException {
+		/* Classe de equivalencia: C20, C2, C3
+		 * Valor-limite: v19, v3, v4 */
+		try {
+			CM.addRecipe(receitaValida1);
+			CM.addRecipe(receitaValida2);
+			CM.addRecipe(receitaValida3);
+			CM.addRecipe(receitaValida4);
+		}
+		catch (AmountOfRecipeException a) {
+			int qntd = CM.getRecipes().size();
+			assertEquals(3, qntd);
+		}
+	}
+	
 	@Test (expected = DuplicatedRecipeException.class)
 	public void testaInsereReceitaNomeDuplicado() throws AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C1, C21, C3
