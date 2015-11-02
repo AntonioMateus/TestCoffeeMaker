@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Inventory.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (02/11/2015 16:43:20)</a> &gt; <a href="../../index.html" class="el_group">TestCoffeeMaker</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">each.usp.ach2006.adaptedfromcsc326.eler</a> &gt; <span class="el_source">Inventory.java</span></div><h1>Inventory.java</h1><pre class="source lang-java linenums">package each.usp.ach2006.adaptedfromcsc326.eler;
+
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InvalidValueException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InventoryException;
+
+/**
+ * @author Sarah Heckman
+ * modified by Marcelo Eler
+ *
+ * Inventory for the coffee maker
+ */
+public class Inventory {
+    
+    private int coffee;
+    private int milk;
+    private int sugar;
+    private int chocolate;
+    
+    /**
+     * Creates a coffee maker inventory object and
+     * fills each item in the inventory with 15 units.
+     * @throws InvalidValueException 
+     */
+<span class="fc" id="L24">    public Inventory() throws InvalidValueException {</span>
+<span class="fc" id="L25">    	setCoffee(20);</span>
+<span class="fc" id="L26">    	setMilk(20);</span>
+<span class="fc" id="L27">    	setSugar(20);</span>
+<span class="fc" id="L28">    	setChocolate(20);</span>
+<span class="fc" id="L29">    }</span>
+    
+    /**
+     * Returns the current number of chocolate units in 
+     * the inventory.
+     * @return int
+     */
+    public int getChocolate() {
+<span class="fc" id="L37">        return chocolate;</span>
+    }
+    
+    /**
+     * Sets the number of chocolate units in the inventory
+     * to the specified amount.
+     * @param chocolate
+     */
+    public synchronized void setChocolate(int chocolate) throws InvalidValueException{
+<span class="pc bpc" id="L46" title="2 of 4 branches missed.">    	if(chocolate &gt;= 0 &amp;&amp; chocolate&lt;=100) {</span>
+<span class="fc" id="L47">    		this.chocolate = chocolate;</span>
+<span class="fc" id="L48">    	}</span>
+    	else
+<span class="nc" id="L50">    		throw new InvalidValueException(&quot;Invalid amount of chocolate&quot;);</span>
+        
+<span class="fc" id="L52">    }</span>
+    
+    /**
+     * Add the number of chocolate units in the inventory 
+     * to the current amount of chocolate units.
+     * @param chocolate
+     * @throws InventoryException
+     */
+    public synchronized void addChocolate(int amtChocolate) throws InvalidValueException{    	    
+//Erro:	if (amtChocolate &gt;= 0 &amp;&amp; amtChocolate+this.chocolate&lt;100) {
+<span class="pc bpc" id="L62" title="1 of 4 branches missed.">    	if (amtChocolate &gt;= 0 &amp;&amp; amtChocolate+this.chocolate&lt;=100) {</span>
+<span class="fc" id="L63">    		this.chocolate += amtChocolate;</span>
+<span class="fc" id="L64">		} else {</span>
+<span class="fc" id="L65">			throw new InvalidValueException(&quot;Units of chocolate must be a positive integer and less equal than 100&quot;);</span>
+		}
+<span class="fc" id="L67">    }</span>
+    
+    /**
+     * Returns the current number of coffee units in
+     * the inventory.
+     * @return int
+     */
+    public int getCoffee() {
+<span class="fc" id="L75">        return coffee;</span>
+    }
+    
+    /**
+     * Sets the number of coffee units in the inventory 
+     * to the specified amount.
+     * @param coffee
+     */
+    public synchronized void setCoffee(int coffee)throws InvalidValueException{ 
+<span class="pc bpc" id="L84" title="2 of 4 branches missed.">    	if(coffee &gt;= 0 &amp;&amp; coffee&lt;=100) {</span>
+<span class="fc" id="L85">    		this.coffee = coffee;</span>
+<span class="fc" id="L86">    	}</span>
+    	else
+<span class="nc" id="L88">    		throw new InvalidValueException(&quot;Invalid amount of coffee&quot;);</span>
+<span class="fc" id="L89">    }</span>
+    
+    /**
+     * Add the number of coffee units in the inventory 
+     * to the current amount of coffee units.
+     * @param coffee
+     * @throws InventoryException
+     */
+    public synchronized void addCoffee(int amtCoffee) throws InvalidValueException{    	
+<span class="pc bpc" id="L98" title="1 of 4 branches missed.">		if (amtCoffee &gt;= 0 &amp;&amp; amtCoffee+this.coffee&lt;=100) {</span>
+<span class="fc" id="L99">			this.coffee += amtCoffee;</span>
+<span class="fc" id="L100">		} else {</span>
+<span class="fc" id="L101">			throw new InvalidValueException(&quot;Units of coffee must be a positive integer and less equal than 100&quot;);</span>
+		}
+<span class="fc" id="L103">    }</span>
+    
+    /**
+     * Returns the current number of milk units in
+     * the inventory.
+     * @return int
+     */
+    public int getMilk() {
+<span class="fc" id="L111">        return milk;</span>
+    }
+    
+    /**
+     * Sets the number of milk units in the inventory
+     * to the specified amount.
+     * @param milk
+     */
+    public synchronized void setMilk(int milk) throws InvalidValueException{
+<span class="pc bpc" id="L120" title="2 of 4 branches missed.">    	if(milk &gt;= 0 &amp;&amp; milk&lt;=100) {</span>
+<span class="fc" id="L121">    		this.milk = milk;</span>
+<span class="fc" id="L122">    	} else {</span>
+<span class="nc" id="L123">			throw new InvalidValueException(&quot;Invalid amount of milk&quot;);</span>
+		}
+<span class="fc" id="L125">    }</span>
+    
+    /**
+     * Add the number of milk units in the inventory 
+     * to the current amount of milk units.
+     * @param milk
+     * @throws InventoryException
+     */
+    public synchronized void addMilk(int amtMilk) throws InvalidValueException{    	
+<span class="pc bpc" id="L134" title="1 of 4 branches missed.">		if (amtMilk &gt;= 0 &amp;&amp; amtMilk + this.milk&lt;=100) {</span>
+<span class="fc" id="L135">			this.milk += amtMilk;</span>
+<span class="fc" id="L136">		} else {</span>
+<span class="fc" id="L137">			throw new InvalidValueException(&quot;Units of milk must be a positive integer and less equal than 100&quot;);</span>
+		}
+<span class="fc" id="L139">    }</span>
+    
+    /**
+     * Returns the current number of sugar units in 
+     * the inventory.
+     * @return int
+     */
+    public int getSugar() {
+<span class="fc" id="L147">        return sugar;</span>
+    }
+    
+    /**
+     * Sets the number of sugar units in the inventory
+     * to the specified amount.
+     * @param sugar
+     */
+    public synchronized void setSugar(int sugar) throws InvalidValueException{
+<span class="pc bpc" id="L156" title="2 of 4 branches missed.">    	if(sugar &gt;= 0 &amp;&amp; sugar&lt;=100) {</span>
+<span class="fc" id="L157">    		this.sugar = sugar;</span>
+<span class="fc" id="L158">    	}else {</span>
+<span class="nc" id="L159">			throw new InvalidValueException(&quot;Invalid amount of sugar&quot;);</span>
+		}
+<span class="fc" id="L161">    }</span>
+    
+    /**
+     * Add the number of sugar units in the inventory 
+     * to the current amount of sugar units.
+     * @param sugar
+     * @throws InventoryException
+     */
+    public synchronized void addSugar(int amtSugar) throws InvalidValueException {    	
+<span class="pc bpc" id="L170" title="1 of 4 branches missed.">		if (amtSugar &gt;= 0 &amp;&amp; amtSugar+this.sugar&lt;=100) {</span>
+<span class="fc" id="L171">			this.sugar += amtSugar;</span>
+<span class="fc" id="L172">		} else {</span>
+<span class="fc" id="L173">			throw new InvalidValueException(&quot;Units of sugar must be a positive integer&quot;);</span>
+		}
+<span class="fc" id="L175">    }</span>
+    
+    /**
+     * Returns true if there are enough ingredients to make
+     * the beverage.
+     * @param r
+     * @return boolean
+     */
+    protected synchronized boolean enoughIngredients(Recipe r) {
+<span class="fc" id="L184">        boolean isEnough = true;       </span>
+        
+<span class="fc bfc" id="L186" title="All 2 branches covered.">        if(this.coffee &lt; r.getAmtCoffee()) {</span>
+<span class="fc" id="L187">            isEnough = false;</span>
+        }
+//Erro:	if(this.milk &lt;= r.getAmtMilk()) {
+<span class="fc bfc" id="L190" title="All 2 branches covered.">        if(this.milk &lt; r.getAmtMilk()) {</span>
+<span class="fc" id="L191">            isEnough = false;</span>
+        }
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        if(this.sugar &lt; r.getAmtSugar()) {</span>
+<span class="fc" id="L194">            isEnough = false;</span>
+        }
+<span class="fc bfc" id="L196" title="All 2 branches covered.">        if(this.chocolate &lt; r.getAmtChocolate()) {</span>
+<span class="fc" id="L197">            isEnough = false;</span>
+        }
+        
+<span class="fc" id="L200">        return isEnough;</span>
+    }
+    
+    /**
+     * Removes the ingredients used to make the specified 
+     * recipe.  Assumes that the user has checked that there
+     * are enough ingredients to make 
+     * @param r
+     */
+    public synchronized boolean useIngredients(Recipe r) {
+<span class="fc bfc" id="L210" title="All 2 branches covered.">    	if (enoughIngredients(r)) {</span>
+<span class="fc" id="L211">    		this.coffee -= r.getAmtCoffee();</span>
+<span class="fc" id="L212">    		this.milk -= r.getAmtMilk();</span>
+//Erro:		this.sugar = r.getAmtSugar();
+<span class="fc" id="L214">    		this.sugar -= r.getAmtSugar();</span>
+<span class="fc" id="L215">    		this.chocolate -= r.getAmtChocolate();</span>
+<span class="fc" id="L216">	    	return true;</span>
+    	} else {
+<span class="fc" id="L218">    		return false;</span>
+    	}
+    }
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>Merged (02/11/2015 16:43:20)</div></body></html>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>CoffeeMaker.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (02/11/2015 16:43:20)</a> &gt; <a href="../../index.html" class="el_group">TestCoffeeMaker</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">each.usp.ach2006.adaptedfromcsc326.eler</a> &gt; <span class="el_source">CoffeeMaker.java</span></div><h1>CoffeeMaker.java</h1><pre class="source lang-java linenums">package each.usp.ach2006.adaptedfromcsc326.eler;
+
+import java.util.Vector;
+
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.AmountOfRecipeException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.DuplicatedRecipeException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InsufficientAmountOfMoneyException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InvalidValueException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InventoryException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.RecipeException;
+
+/**
+ * @author Sarah Heckman
+ * modified by Marcelo Eler
+ *
+ * Inventory for the coffee maker
+ */
+
+public class CoffeeMaker {
+	/** Array of recipes in coffee maker */
+	private  RecipeBook recipeBook;
+	/** Inventory of the coffee maker */
+    private  Inventory inventory;
+	
+    /**
+     * Constructor for the coffee maker
+     *
+     */
+<span class="fc" id="L29">	public CoffeeMaker() {</span>
+<span class="fc" id="L30">	    recipeBook = new RecipeBook();</span>
+		try {
+<span class="fc" id="L32">			inventory = new Inventory();</span>
+<span class="pc" id="L33">		} catch (InvalidValueException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L35">			e.printStackTrace();</span>
+		}
+<span class="fc" id="L37">	}</span>
+	
+	/**
+	 * Returns true if the recipe is added to the
+	 * list of recipes in the CoffeeMaker and false
+	 * otherwise.
+	 * @param r
+	 * @return boolean
+	 */
+	public boolean addRecipe(Recipe r) throws AmountOfRecipeException, DuplicatedRecipeException {
+<span class="fc" id="L47">		return recipeBook.addRecipe(r);</span>
+	}		
+	
+	
+	/**
+	 * Returns the name of the successfully deleted recipe
+	 * or null if the recipe cannot be deleted.
+	 * 
+	 * @param recipeToDelete
+	 * @return String (recipe name)
+	 * @throws RecipeException 
+	 */
+	public boolean deleteRecipe(String recipeName) throws RecipeException {
+<span class="fc" id="L60">		return recipeBook.deleteRecipe(recipeName);</span>
+	}
+	
+    /**
+     * Returns true if inventory was successfully added
+     * @param amtCoffee
+     * @param amtMilk
+     * @param amtSugar
+     * @param amtChocolate
+     * @return boolean
+     */
+	
+	public synchronized void addCoffeeInventory(int amtCoffee) throws InvalidValueException {
+<span class="fc" id="L73">		inventory.addCoffee(amtCoffee);</span>
+<span class="fc" id="L74">	}</span>
+	
+	public synchronized void addMilkInventory(int amtMilk) throws InvalidValueException {
+<span class="fc" id="L77">		inventory.addMilk(amtMilk);</span>
+<span class="fc" id="L78">	}</span>
+	
+	public synchronized void addSugarInventory(int amtSugar) throws InvalidValueException {
+//Erro: inventory.addChocolate(amtSugar);
+<span class="fc" id="L82">		inventory.addSugar(amtSugar);</span>
+<span class="fc" id="L83">	}</span>
+	
+	public synchronized void addChocolateInventory(int amtChocolate) throws InvalidValueException {
+<span class="fc" id="L86">		inventory.addChocolate(amtChocolate);</span>
+<span class="fc" id="L87">	}</span>
+    
+    public synchronized int checkCoffeeInventory(){
+<span class="fc" id="L90">    	return inventory.getCoffee();</span>
+    }
+    
+    public synchronized int checkMilkInventory(){
+<span class="fc" id="L94">    	return inventory.getMilk();</span>
+    }
+    
+    public synchronized int checkSugarInventory(){
+<span class="fc" id="L98">    	return inventory.getSugar();</span>
+    }
+    
+    public synchronized int checkChocolateInventory(){
+<span class="fc" id="L102">    	return inventory.getChocolate();</span>
+    }
+    
+    
+    /**
+     * Returns the change of a user's beverage purchase, or
+     * the user's money if the beverage cannot be made
+     * @param r
+     * @param amtPaid
+     * @return int
+     */
+    public synchronized int makeCoffee(String recipeName, int amtPaid) throws 
+    	InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException {    	
+//Erro:	if (amtPaid&lt;0 &amp;&amp; amtPaid&gt;500){
+<span class="pc bpc" id="L116" title="2 of 4 branches missed.">    	if (amtPaid&lt;0 || amtPaid&gt;500){</span>
+<span class="nc" id="L117">    		throw new InvalidValueException(&quot;Payment must be positive or less than 500 cents&quot;);</span>
+    	}
+<span class="fc" id="L119">        int change = 0;</span>
+<span class="fc" id="L120">        Recipe recipe = recipeBook.getRecipe(recipeName);</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (recipe == null) {</span>
+<span class="fc" id="L122">        	change = amtPaid;</span>
+<span class="fc" id="L123">        	throw new RecipeException(&quot;Unknown Recipe&quot;);</span>
+        } else 
+//Erro:		if (recipe.getPrice() &lt; amtPaid) {
+<span class="fc bfc" id="L126" title="All 2 branches covered.">        	if (recipe.getPrice() &lt;= amtPaid) {</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">        		if (inventory.useIngredients(recipe)) {</span>
+//Erro:				change = recipe.getPrice();
+<span class="fc" id="L129">        			change = amtPaid-recipe.getPrice();</span>
+<span class="fc" id="L130">        		}</span>
+        		else 
+        		{
+<span class="fc" id="L133">        			change = amtPaid;</span>
+<span class="fc" id="L134">        			throw new InventoryException(&quot;Insuficcient amount of coffee, choco, milk or sugar&quot;);</span>
+        		}
+        	} else {
+<span class="fc" id="L137">        		change = amtPaid;</span>
+<span class="fc" id="L138">        		throw new InsufficientAmountOfMoneyException(&quot;Insufficient money&quot;);</span>
+        	}
+        
+<span class="fc" id="L141">        return change;</span>
+    }
+
+	/**
+	 * Returns the list of Recipes in the RecipeBook.
+	 * @return Recipe []
+	 */
+	public synchronized Vector&lt;Recipe&gt; getRecipes() {
+<span class="fc" id="L149">		return recipeBook.getRecipes();</span>
+	} 
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>Merged (02/11/2015 16:43:20)</div></body></html>
