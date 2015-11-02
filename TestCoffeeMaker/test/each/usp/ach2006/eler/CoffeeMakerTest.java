@@ -278,7 +278,7 @@ public class CoffeeMakerTest {
 	/* Testes para checkCoffeeInventory - INICIO */
 	
 	@Test
-	public void testaInventorioCafe() throws Exception{
+	public void testaInventarioCafe() throws Exception{
 		/* Classe de equivalencia: C9
 		 * Valor-limite: v9 */
 		
@@ -292,7 +292,7 @@ public class CoffeeMakerTest {
 	/* Testes para checkMilkInventory - INICIO */
 	
 	@Test
-	public void testaInventorioLeite(){
+	public void testaInventarioLeite(){
 		/* Classe de equivalencia: C10
 		 * Valor-limite: v10 */
 		
@@ -306,7 +306,7 @@ public class CoffeeMakerTest {
 	/* Testes para checkSugarInventory - INICIO */
 	
 	@Test
-	public void testaInventorioAcucar() throws Exception{
+	public void testaInventarioAcucar() throws Exception{
 		/* Classe de equivalencia: C11
 		 * Valor-limite: v11 */
 		
@@ -320,7 +320,7 @@ public class CoffeeMakerTest {
 	/* Testes para checkChocolateInventory - INICIO */
 	
 	@Test
-	public void testaInventorioChocolate() throws Exception{
+	public void testaInventarioChocolate() throws Exception{
 		/* Classe de equivalencia: C12
 		 * Valor-limite: v12 */
 		
@@ -363,15 +363,6 @@ public class CoffeeMakerTest {
 		assertEquals(CM.getRecipes().get(0).getPrice()-1, troco);
 	}
 	
-	@Test (expected = InvalidValueException.class)
-	public void testaFazerCafeDinheiroNegativo() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
-		/* Classe de equivalencia: C13, C33, C15, C16, C17, C18
-		 * Valor-limite: amtPaid < 0 */
-		
-		CM.addRecipe(receitaValida1);
-		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), -1);
-	}
-	
 	@Test (expected = RecipeException.class)
 	public void testaFazerCafeReceitaInexistente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C32
@@ -383,7 +374,7 @@ public class CoffeeMakerTest {
 	}
 	
 	@Test
-	public void testaFazerCafeInventorioCafeLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+	public void testaFazerCafeInventarioCafeLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C18
 		 * Valor-limite: v14, v15 */
 		
@@ -393,7 +384,7 @@ public class CoffeeMakerTest {
 	}
 	
 	@Test (expected = InventoryException.class)
-	public void testaFazerCafeInventorioCafeInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+	public void testaFazerCafeInventarioCafeInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C34, C16, C17, C18
 		 * Valor-limite: v14, v31 */
 		
@@ -403,7 +394,7 @@ public class CoffeeMakerTest {
 	}
 
 	@Test
-	public void testaFazerCafeInventorioLeiteLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+	public void testaFazerCafeInventarioLeiteLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C18
 		 * Valor-limite: v14, v16 */
 		
@@ -413,7 +404,7 @@ public class CoffeeMakerTest {
 	}
 	
 	@Test (expected = InventoryException.class)
-	public void testaFazerCafeInventorioLeiteInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+	public void testaFazerCafeInventarioLeiteInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C35, C17, C18
 		 * Valor-limite: v14, v32 */
 		
@@ -423,7 +414,7 @@ public class CoffeeMakerTest {
 	}
 
 	@Test
-	public void testaFazerCafeInventorioAcucarLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+	public void testaFazerCafeInventarioAcucarLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C18
 		 * Valor-limite: v14, v17 */
 		
@@ -433,7 +424,7 @@ public class CoffeeMakerTest {
 	}
 	
 	@Test (expected = InventoryException.class)
-	public void testaFazerCafeInventorioAcucarInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+	public void testaFazerCafeInventarioAcucarInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C36, C18
 		 * Valor-limite: v14, v33 */
 		
@@ -443,7 +434,7 @@ public class CoffeeMakerTest {
 	}
 	
 	@Test
-	public void testaFazerCafeInventorioChocolateLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+	public void testaFazerCafeInventarioChocolateLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C18
 		 * Valor-limite: v14, v18 */
 		
@@ -453,7 +444,7 @@ public class CoffeeMakerTest {
 	}
 	
 	@Test (expected = InventoryException.class)
-	public void testaFazerCafeInventorioChocolateInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+	public void testaFazerCafeInventarioChocolateInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C37
 		 * Valor-limite: v14, v34 */
 		
