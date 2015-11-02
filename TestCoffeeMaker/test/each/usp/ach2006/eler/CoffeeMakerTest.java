@@ -134,6 +134,22 @@ public class CoffeeMakerTest {
 		assertEquals(false, ok);
 	}
 	
+	@Test
+	public void testaInsereQuatroReceitasEVerificaNumeroReceitasInseridas () throws DuplicatedRecipeException {
+		/* Classe de equivalencia: C20, C2, C3
+		 * Valor-limite: v19, v3, v4 */
+		try {
+			CM.addRecipe(receitaValida1);
+			CM.addRecipe(receitaValida2);
+			CM.addRecipe(receitaValida3);
+			CM.addRecipe(receitaValida4);
+		}
+		catch (AmountOfRecipeException a) {
+			int qntd = CM.getRecipes().size();
+			assertEquals(3, qntd);
+		}
+	}
+	
 	@Test (expected = DuplicatedRecipeException.class)
 	public void testaInsereReceitaNomeDuplicado() throws AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C1, C21, C3
@@ -453,6 +469,26 @@ public class CoffeeMakerTest {
 		assertEquals(CM.getRecipes().get(0).getPrice()+1, troco);
 	}
 
+	@Test
+	public void testaFazerCafeConsumoInventario() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+		/* Classe de equivalencia: C13, C14, C15, C16, C17, C18
+		 * Valor-limite: - */
+
+		Recipe receitaUnitaria = new Recipe("Teste Unidades", 1, 1, 1, 1, 1);
+		int cafeInicial = CM.checkCoffeeInventory();
+		int leiteInicial = CM.checkMilkInventory();
+		int acucarInicial = CM.checkSugarInventory();
+		int chocolateInicial = CM.checkChocolateInventory();
+		
+		CM.addRecipe(receitaUnitaria);
+		CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
+		
+		assertEquals(cafeInicial-CM.getRecipes().get(0).getAmtCoffee(), CM.checkCoffeeInventory());
+		assertEquals(leiteInicial-CM.getRecipes().get(0).getAmtMilk(), CM.checkMilkInventory());
+		assertEquals(acucarInicial-CM.getRecipes().get(0).getAmtSugar(), CM.checkSugarInventory());
+		assertEquals(chocolateInicial-CM.getRecipes().get(0).getAmtChocolate(), CM.checkChocolateInventory());
+	}
+	
 	/* Testes para makeCoffee - FIM */
 	
 	
