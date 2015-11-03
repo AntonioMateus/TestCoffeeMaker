@@ -39,6 +39,7 @@ public class CoffeeMakerStructuralTest {
 	
 	private CoffeeMaker CM;
 	private Recipe receitaValida1;
+	private Recipe receitaValidaQuaseIgualA1;
 	private Recipe receitaValida2;
 	private Recipe receitaValida3;
 	private Recipe receitaValida4;
@@ -47,6 +48,7 @@ public class CoffeeMakerStructuralTest {
 	public void setUp() throws Exception {
 		CM = new CoffeeMaker();
 		receitaValida1 = new Recipe("Cafe",100,4,1,1,1);
+		receitaValidaQuaseIgualA1 = new Recipe("Cafe diferente",100,4,5,1,1);
 		receitaValida2 = new Recipe("Chocolate Quente",75,1,3,1,3);
 		receitaValida3 = new Recipe("Chocolate Frio",55,1,3,2,3);
 		receitaValida4 = new Recipe("Cafe Fraco",25,1,1,1,1);
@@ -162,6 +164,15 @@ public class CoffeeMakerStructuralTest {
 			int qntd = CM.getRecipes().size();
 			assertEquals(3, qntd);
 		}
+	}
+	
+	@Test
+	public void testaInsereDuasReceitasComSegundaQuaseIgualAPrimeira() throws DuplicatedRecipeException, AmountOfRecipeException {
+		/* Classe de equivalencia:
+		 * Valor-limite: */
+		boolean ok = CM.addRecipe(receitaValida1);
+		ok = CM.addRecipe(receitaValidaQuaseIgualA1);
+		assertEquals(true,ok);
 	}
 
 	/* Testes para addRecipe - FIM*/

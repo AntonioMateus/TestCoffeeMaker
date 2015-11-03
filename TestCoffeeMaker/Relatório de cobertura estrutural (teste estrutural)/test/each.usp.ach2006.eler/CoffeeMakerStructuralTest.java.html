@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>CoffeeMakerStructuralTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (03/11/2015 13:48:24)</a> &gt; <a href="../../index.html" class="el_group">TestCoffeeMaker</a> &gt; <a href="../index.html" class="el_bundle">test</a> &gt; <a href="index.source.html" class="el_package">each.usp.ach2006.eler</a> &gt; <span class="el_source">CoffeeMakerStructuralTest.java</span></div><h1>CoffeeMakerStructuralTest.java</h1><pre class="source lang-java linenums">package each.usp.ach2006.eler;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import each.usp.ach2006.adaptedfromcsc326.eler.CoffeeMaker;
+import each.usp.ach2006.adaptedfromcsc326.eler.Recipe;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.AmountOfRecipeException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.DuplicatedRecipeException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InsufficientAmountOfMoneyException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InvalidValueException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InventoryException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.RecipeException;
+
+<span class="fc" id="L17">public class CoffeeMakerStructuralTest {</span>
+	/* Segundo especificacao:
+	 * Na classe CoffeeMakerTest devem ser escritos os casos de teste para testar as operacoes para adicionar receita,
+	 * apagar receita, adicionar ingredientes, verificar quantidade de ingredientes, fazer cafe e obter receitas.
+	 */
+	
+	/* Metodos a serem testados:
+	 * 
+	 * boolean addRecipe(Recipe r) throws InvalidValueException 
+	 *  
+	 * void addCoffeeInventory(int amtCoffee) throws InvalidValueException
+	 * 
+	 * void addMilkInventory(int amtMilk) throws InvalidValueException
+	 * 
+	 * void addSugarInventory(int amtSugar) throws InvalidValueException
+	 * 
+	 * void addChocolateInventory(int amtChocolate) throws InvalidValueException
+	 * 
+	 * int makeCoffee(String recipeName, int amtPaid) throws RecipeException,
+	 * InsufficientAmountOfMoneyException, InventoryException
+	 * 
+	 */
+	
+	private CoffeeMaker CM;
+	private Recipe receitaValida1;
+	private Recipe receitaValidaQuaseIgualA1;
+	private Recipe receitaValida2;
+	private Recipe receitaValida3;
+	private Recipe receitaValida4;
+	
+	@Before
+	public void setUp() throws Exception {
+<span class="fc" id="L49">		CM = new CoffeeMaker();</span>
+<span class="fc" id="L50">		receitaValida1 = new Recipe(&quot;Cafe&quot;,100,4,1,1,1);</span>
+<span class="fc" id="L51">		receitaValidaQuaseIgualA1 = new Recipe(&quot;Cafe diferente&quot;,100,4,5,1,1);</span>
+<span class="fc" id="L52">		receitaValida2 = new Recipe(&quot;Chocolate Quente&quot;,75,1,3,1,3);</span>
+<span class="fc" id="L53">		receitaValida3 = new Recipe(&quot;Chocolate Frio&quot;,55,1,3,2,3);</span>
+<span class="fc" id="L54">		receitaValida4 = new Recipe(&quot;Cafe Fraco&quot;,25,1,1,1,1);</span>
+<span class="fc" id="L55">	}</span>
+	
+	/* Testes para makeCoffee - INICIO */
+	
+	@Test (expected=InvalidValueException.class) 
+	public void testaPagamentoMaiorQue500() throws InvalidValueException, DuplicatedRecipeException, AmountOfRecipeException, InventoryException, RecipeException, InsufficientAmountOfMoneyException  {
+		/* Classe de equivalencia: 
+		 * Valor-limite: */
+<span class="nc" id="L63">		CM.addRecipe(receitaValida1);</span>
+<span class="nc" id="L64">		int troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), 501);</span>
+<span class="nc" id="L65">		assertEquals(401,troco);</span>
+<span class="nc" id="L66">	}</span>
+	
+	@Test (expected=InvalidValueException.class) 
+	public void testaPagamentoNegativo() throws InvalidValueException, DuplicatedRecipeException, AmountOfRecipeException, InventoryException, RecipeException, InsufficientAmountOfMoneyException  {
+		/* Classe de equivalencia: 
+		 * Valor-limite: */
+<span class="nc" id="L72">		CM.addRecipe(receitaValida1);</span>
+<span class="nc" id="L73">		int troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), -1);</span>
+<span class="nc" id="L74">	}</span>
+	
+	@Test (expected = InvalidValueException.class)
+	public void testaFazerCafeDinheiroNegativo() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+		/* Classe de equivalencia: C13, C33, C15, C16, C17, C18
+		 * Valor-limite: amtPaid &lt; 0 */
+		
+<span class="nc" id="L81">		CM.addRecipe(receitaValida1);</span>
+<span class="nc" id="L82">		int troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), -1);</span>
+<span class="nc" id="L83">	}</span>
+
+	@Test
+	public void testaFazerCafeConsumoInventario() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+		/* Classe de equivalencia: C13, C14, C15, C16, C17, C18
+		 * Valor-limite: - */
+
+<span class="fc" id="L90">	    Recipe receitaUnitaria = new Recipe(&quot;Teste Unidades&quot;, 1, 1, 1, 1, 1);</span>
+<span class="fc" id="L91">		int cafeInicial = CM.checkCoffeeInventory();</span>
+<span class="fc" id="L92">		int leiteInicial = CM.checkMilkInventory();</span>
+<span class="fc" id="L93">		int acucarInicial = CM.checkSugarInventory();</span>
+<span class="fc" id="L94">		int chocolateInicial = CM.checkChocolateInventory();</span>
+			
+<span class="fc" id="L96">		CM.addRecipe(receitaUnitaria);</span>
+<span class="fc" id="L97">		CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);</span>
+			
+<span class="fc" id="L99">		assertEquals(cafeInicial-CM.getRecipes().get(0).getAmtCoffee(), CM.checkCoffeeInventory());</span>
+<span class="fc" id="L100">		assertEquals(leiteInicial-CM.getRecipes().get(0).getAmtMilk(), CM.checkMilkInventory());</span>
+<span class="fc" id="L101">		assertEquals(acucarInicial-CM.getRecipes().get(0).getAmtSugar(), CM.checkSugarInventory());</span>
+<span class="fc" id="L102">		assertEquals(chocolateInicial-CM.getRecipes().get(0).getAmtChocolate(), CM.checkChocolateInventory());</span>
+<span class="fc" id="L103">	}</span>
+	
+	/* Testes para makeCoffee - FIM */
+	
+	/* Testes para addChocolateInventory - INICIO */
+	
+	@Test (expected=InvalidValueException.class)
+	public void testaRetirarUmaUnidadeInventarioChocolate() throws InvalidValueException {
+		/* Classe de equivalencia: 
+		 * Valor-limite: */
+<span class="nc" id="L113">		CM.addChocolateInventory(-1);</span>
+<span class="nc" id="L114">	}</span>
+	
+	/* Testes para addChocolateInventory - FIM */
+	
+	/* Testes para addCoffeeInventory - INICIO */
+	
+	@Test (expected=InvalidValueException.class)
+	public void testaRetirarUmaUnidadeInventarioCafe() throws InvalidValueException {
+		/* Classe de equivalencia: 
+		 * Valor-limite: */
+<span class="nc" id="L124">		CM.addCoffeeInventory(-1);</span>
+<span class="nc" id="L125">	}</span>
+	
+	/* Testes para addCoffeeInventory - FIM */
+	
+	/* Testes para addMilkInventory - INICIO */
+	
+	@Test (expected=InvalidValueException.class)
+	public void testaRetirarUmaUnidadeInventarioLeite() throws InvalidValueException {
+		/* Classe de equivalencia: 
+		 * Valor-limite: */
+<span class="nc" id="L135">		CM.addMilkInventory(-1);</span>
+<span class="nc" id="L136">	}</span>
+	
+	/* Testes para addMilkInventory - FIM */
+	
+	/* Testes para addSugarInventory - INICIO */
+	
+	@Test (expected=InvalidValueException.class)
+	public void testaRetirarUmaUnidadeInventarioAcucar() throws InvalidValueException {
+		/* Classe de equivalencia: 
+		 * Valor-limite: */
+<span class="nc" id="L146">		CM.addSugarInventory(-1);</span>
+<span class="nc" id="L147">	}</span>
+	
+	/* Testes para addSugarInventory - FIM */
+	
+	/* Testes para addRecipe - INICIO*/
+	
+	@Test
+	public void testaInsereQuatroReceitasEVerificaNumeroReceitasInseridas () throws DuplicatedRecipeException {
+		/* Classe de equivalencia: C20, C2, C3
+		 * Valor-limite: v19, v3, v4 */
+		try {
+<span class="nc" id="L158">			CM.addRecipe(receitaValida1);</span>
+<span class="nc" id="L159">			CM.addRecipe(receitaValida2);</span>
+<span class="nc" id="L160">			CM.addRecipe(receitaValida3);</span>
+<span class="nc" id="L161">			CM.addRecipe(receitaValida4);</span>
+<span class="nc" id="L162">		}</span>
+<span class="fc" id="L163">		catch (AmountOfRecipeException a) {</span>
+<span class="fc" id="L164">			int qntd = CM.getRecipes().size();</span>
+<span class="fc" id="L165">			assertEquals(3, qntd);</span>
+		}
+<span class="fc" id="L167">	}</span>
+	
+	@Test
+	public void testaInsereDuasReceitasComSegundaQuaseIgualAPrimeira() throws DuplicatedRecipeException, AmountOfRecipeException {
+		/* Classe de equivalencia:
+		 * Valor-limite: */
+<span class="fc" id="L173">		boolean ok = CM.addRecipe(receitaValida1);</span>
+<span class="fc" id="L174">		ok = CM.addRecipe(receitaValidaQuaseIgualA1);</span>
+<span class="fc" id="L175">		assertEquals(true,ok);</span>
+<span class="fc" id="L176">	}</span>
+
+	/* Testes para addRecipe - FIM*/
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>AllTests (03/11/2015 13:48:24)</div></body></html>

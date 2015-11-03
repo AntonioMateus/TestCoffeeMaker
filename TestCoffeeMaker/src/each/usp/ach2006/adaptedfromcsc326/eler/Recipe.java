@@ -72,7 +72,8 @@ public class Recipe {
 	 * @param amtMilk   The amtMilk to set.
 	 */
     public void setAmtMilk(int amtMilk) throws InvalidValueException{
-		if (amtMilk >= 0) {
+//Erro:	if (amtMilk >= 0) {
+    	if (amtMilk >= 0 && amtMilk <= 100) {
 			this.amtMilk = amtMilk;
 		} else {
 			throw new InvalidValueException("Units of milk must be a positive integer");
@@ -89,7 +90,8 @@ public class Recipe {
 	 */
     public void setAmtSugar(int amtSugar) throws InvalidValueException {
 //Erro:	if (amtSugar > 0 && amtSugar<100) {
-    	if (amtSugar >= 0 && amtSugar<100) {
+//Erro: if (amtSugar >= 0 && amtSugar<100) {
+    	if (amtSugar >= 0 && amtSugar <= 100) {
 			this.amtSugar = amtSugar;
 		} else {
 			throw new InvalidValueException("Units of sugar must be a positive integer");

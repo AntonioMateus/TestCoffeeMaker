@@ -112,5 +112,20 @@ public class RecipeStructuralTest {
 		Recipe receita = new Recipe("Cafe simples",50,4,1,1,1);
 		assertEquals(50,receita.getPrice());
 	}	
+	
+	@Test (expected=InvalidValueException.class)
+	public void testeLeiteSuperior100() throws InvalidValueException {
+		/* Classe de equivalencia:
+		 * Valor-limite: */
+		Recipe receita = new Recipe("Super cafe com leite",50,4,101,1,1);
+	}
+	
+	@Test
+	public void testeCriaReceitaComAcucarNoLimite() throws InvalidValueException {
+		/* Classe de equivalencia: 
+		 * Valor-limite: */
+		Recipe receita = new Recipe("Diabetes",50,4,1,100,1);
+	}
+	
 	/* Testes para construtor (após teste estrutural) - FIM */
 }

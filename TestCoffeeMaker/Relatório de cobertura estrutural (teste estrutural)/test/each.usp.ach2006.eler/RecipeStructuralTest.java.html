@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>RecipeStructuralTest.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (03/11/2015 13:48:24)</a> &gt; <a href="../../index.html" class="el_group">TestCoffeeMaker</a> &gt; <a href="../index.html" class="el_bundle">test</a> &gt; <a href="index.source.html" class="el_package">each.usp.ach2006.eler</a> &gt; <span class="el_source">RecipeStructuralTest.java</span></div><h1>RecipeStructuralTest.java</h1><pre class="source lang-java linenums">package each.usp.ach2006.eler;
+
+import org.junit.Test;
+
+import each.usp.ach2006.adaptedfromcsc326.eler.Recipe;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InvalidValueException;
+import static org.junit.Assert.assertEquals;
+
+public class RecipeStructuralTest {
+	/* Testa a criação de uma receita */
+	
+	/* Segundo especificação:
+	 * Na classe RecipeTest devem ser escritos os casos de teste para testar as operações da
+	 * classe Recipe. Em particular, deve-se testar apenas a criação de uma receita por meio de seu construtor.
+	 */
+<span class="fc" id="L16">	public RecipeStructuralTest() {</span>
+		
+<span class="fc" id="L18">	}</span>
+	
+	/* testes para construtor (após teste estrutural) - INICIO */
+	@Test
+	public void testeVerificaAmtChocolateReceita() throws InvalidValueException {
+		/* Classe de equivalencia: (name != null &amp;&amp; name.length &gt; 0), (amtSugar &gt;= 0 &amp;&amp; amtSugar &lt;= 100),
+		 * (price &gt; 0), (amtCoffee &gt;= 0 &amp;&amp; amtCoffee &lt;= 100), (amtChocolate &gt;= 0 &amp;&amp; amtChocolate &lt;= 100),
+		 * (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100)
+		 * Valor-limite: (amtMilk = 1), (amtSugar = 1), (amtChocolate = 1)*/
+<span class="fc" id="L27">		Recipe receita = new Recipe(&quot;Cafe simples&quot;,50,4,1,1,1);</span>
+<span class="fc" id="L28">		assertEquals(1,receita.getAmtChocolate());</span>
+<span class="fc" id="L29">	}</span>
+	
+	@Test (expected=InvalidValueException.class)
+	public void testeCriaReceitaComMaisChocolateQueLimite() throws InvalidValueException {
+		/* Classe de equivalencia: (amtChocolate &gt; 100), (name != null &amp;&amp; name.length &gt; 0),
+		 * (amtSugar &gt;= 0 &amp;&amp; amtSugar &lt;= 100), (price &gt; 0), (amtCoffee &gt;= 0 &amp;&amp; amtCoffee &lt;= 100),
+		 * (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100) 
+		 * Valor-limite: (amtChocolate = 101), (amtSugar = 1), (amtMilk = 1) */
+<span class="nc" id="L37">		Recipe receita = new Recipe(&quot;Super chocolate&quot;,50,4,1,1,101);</span>
+<span class="nc" id="L38">	}</span>
+	
+	@Test 
+	public void testeVerificaAmtCoffeeReceita() throws InvalidValueException {
+		/* Classe de equivalencia: (name != null &amp;&amp; name.length &gt; 0), (amtSugar &gt;= 0 &amp;&amp; amtSugar &lt;= 100),
+		 * (price &gt; 0), (amtCoffee &gt;= 0 &amp;&amp; amtCoffee &lt;= 100), (amtChocolate &gt;= 0 &amp;&amp; amtChocolate &lt;= 100),
+		 * (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100)
+		 * Valor-limite: (amtMilk = 1), (amtSugar = 1), (amtChocolate = 1)*/
+<span class="fc" id="L46">		Recipe receita = new Recipe(&quot;Cafe simples&quot;,50,4,1,1,1);</span>
+<span class="fc" id="L47">		assertEquals(4,receita.getAmtCoffee());</span>
+<span class="fc" id="L48">	}</span>
+	
+	@Test (expected=InvalidValueException.class)
+	public void testeCriaReceitaComMaisCafeQueLimite() throws InvalidValueException {
+		/* Classe de equivalencia: (amtCoffee &gt; 100), (name != null &amp;&amp; name.length &gt; 0), 
+		 * (amtChocolate &gt;= 0 &amp;&amp; amtChocolate &lt;= 100), (price &gt; 0), (amtSugar &gt;= 0 &amp;&amp; amtSugar &lt;= 100)
+		 * (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100)
+		 * Valor-limite: (amtCoffee = 101), (amtMilk = 1), (amtSugar = 1), (amtChocolate = 1) */
+<span class="nc" id="L56">		Recipe receita = new Recipe(&quot;Super cafe&quot;,50,101,1,1,1);</span>
+<span class="nc" id="L57">	}</span>
+	
+	@Test 
+	public void testeVerificaAmtMilkReceita() throws InvalidValueException {
+		/* Classe de equivalencia: (name != null &amp;&amp; name.length &gt; 0), (amtSugar &gt;= 0 &amp;&amp; amtSugar &lt;= 100),
+		 * (price &gt; 0), (amtCoffee &gt;= 0 &amp;&amp; amtCoffee &lt;= 100), (amtChocolate &gt;= 0 &amp;&amp; amtChocolate &lt;= 100),
+		 * (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100)
+		 * Valor-limite: (amtMilk = 1), (amtSugar = 1), (amtChocolate = 1)*/
+<span class="fc" id="L65">		Recipe receita = new Recipe(&quot;Cafe simples&quot;,50,4,1,1,1);</span>
+<span class="fc" id="L66">		assertEquals(1,receita.getAmtMilk());</span>
+<span class="fc" id="L67">	}</span>
+	
+	@Test 
+	public void testeVerificaAmtSugarReceita() throws InvalidValueException {
+		/* Classe de equivalencia: (name != null &amp;&amp; name.length &gt; 0), (amtSugar &gt;= 0 &amp;&amp; amtSugar &lt;= 100),
+		 * (price &gt; 0), (amtCoffee &gt;= 0 &amp;&amp; amtCoffee &lt;= 100), (amtChocolate &gt;= 0 &amp;&amp; amtChocolate &lt;= 100),
+		 * (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100)
+		 * Valor-limite: (amtMilk = 1), (amtSugar = 1), (amtChocolate = 1)*/
+<span class="fc" id="L75">		Recipe receita = new Recipe(&quot;Cafe simples&quot;,50,4,1,1,1);</span>
+<span class="fc" id="L76">		assertEquals(1,receita.getAmtSugar());</span>
+<span class="fc" id="L77">	}</span>
+	
+	@Test (expected=InvalidValueException.class)
+	public void testeCriaReceitaComMaisAcucarQueLimite() throws InvalidValueException {
+		/* Classe de equivalencia: (amtSugar &gt; 100), (name != null &amp;&amp; name.length &gt; 0), 
+		 * (amtChocolate &gt;= 0 &amp;&amp; amtChocolate &lt;= 100), (price &gt; 0), (amtCoffee &gt;= 0 &amp;&amp; amtCoffee &lt;= 100), 
+		 * (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100)
+		 * Valor-limite: (amtSugar = 101), (amtMilk = 1), (amtChocolate = 1) */
+<span class="nc" id="L85">		Recipe receita = new Recipe(&quot;Diabetes&quot;,50,4,1,101,1);</span>
+<span class="nc" id="L86">	}</span>
+
+	@Test 
+	public void testeVerificaNomeReceita() throws InvalidValueException {
+		/* Classe de equivalencia: (name != null &amp;&amp; name.length &gt; 0), (amtSugar &gt;= 0 &amp;&amp; amtSugar &lt;= 100),
+		 * (price &gt; 0), (amtCoffee &gt;= 0 &amp;&amp; amtCoffee &lt;= 100), (amtChocolate &gt;= 0 &amp;&amp; amtChocolate &lt;= 100),
+		 * (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100)
+		 * Valor-limite: (amtMilk = 1), (amtSugar = 1), (amtChocolate = 1)*/
+<span class="fc" id="L94">		Recipe receita = new Recipe(&quot;Cafe simples&quot;,50,4,1,1,1);</span>
+<span class="fc" id="L95">		assertEquals(&quot;Cafe simples&quot;,receita.getName());</span>
+<span class="fc" id="L96">	}</span>
+	
+	@Test (expected = InvalidValueException.class)
+	public void testeNomeNulo() throws InvalidValueException{
+		/* Classe de equivalencia: (name = null), (amtSugar &gt;= 0 &amp;&amp; amtSugar &lt;= 100), (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100)
+		 * (amtChocolate &gt;= 0 &amp;&amp; amtChocolate &lt;= 100), (price &gt; 0), (amtCoffee &gt;= 0 &amp;&amp; amtCoffee &lt;= 100) 
+		 * Valor-limite: (name = null), (amtSugar = 1) */
+<span class="nc" id="L103">		Recipe receita = new Recipe(null,50,4,3,1,5);</span>
+<span class="nc" id="L104">	}</span>
+	
+	@Test 
+	public void testeVerificaPrecoReceita() throws InvalidValueException {
+		/* Classe de equivalencia: (name != null &amp;&amp; name.length &gt; 0), (amtSugar &gt;= 0 &amp;&amp; amtSugar &lt;= 100),
+		 * (price &gt; 0), (amtCoffee &gt;= 0 &amp;&amp; amtCoffee &lt;= 100), (amtChocolate &gt;= 0 &amp;&amp; amtChocolate &lt;= 100),
+		 * (amtMilk &gt;= 0 &amp;&amp; amtMilk &lt;= 100)
+		 * Valor-limite: (amtMilk = 1), (amtSugar = 1), (amtChocolate = 1)*/
+<span class="fc" id="L112">		Recipe receita = new Recipe(&quot;Cafe simples&quot;,50,4,1,1,1);</span>
+<span class="fc" id="L113">		assertEquals(50,receita.getPrice());</span>
+<span class="fc" id="L114">	}	</span>
+	
+	@Test (expected=InvalidValueException.class)
+	public void testeLeiteSuperior100() throws InvalidValueException {
+		/* Classe de equivalencia:
+		 * Valor-limite: */
+<span class="nc" id="L120">		Recipe receita = new Recipe(&quot;Super cafe com leite&quot;,50,4,101,1,1);</span>
+<span class="nc" id="L121">	}</span>
+	
+	@Test
+	public void testeCriaReceitaComAcucarNoLimite() throws InvalidValueException {
+		/* Classe de equivalencia: 
+		 * Valor-limite: */
+<span class="fc" id="L127">		Recipe receita = new Recipe(&quot;Diabetes&quot;,50,4,1,100,1);</span>
+<span class="fc" id="L128">	}</span>
+	
+	/* Testes para construtor (após teste estrutural) - FIM */
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>AllTests (03/11/2015 13:48:24)</div></body></html>

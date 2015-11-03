@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>RecipeBook.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (03/11/2015 13:48:24)</a> &gt; <a href="../../index.html" class="el_group">TestCoffeeMaker</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">each.usp.ach2006.adaptedfromcsc326.eler</a> &gt; <span class="el_source">RecipeBook.java</span></div><h1>RecipeBook.java</h1><pre class="source lang-java linenums">package each.usp.ach2006.adaptedfromcsc326.eler;
+
+import java.util.Vector;
+
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.AmountOfRecipeException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.DuplicatedRecipeException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.RecipeException;
+
+public class RecipeBook {
+	
+	/** Array of recipes in coffee maker*/
+	private Vector&lt;Recipe&gt; recipeArray;
+	/** Number of recipes in coffee maker */
+<span class="fc" id="L14">	private final int NUM_RECIPES = 4; </span>
+	
+	/**
+	 * Default constructor for a RecipeBook.
+	 */
+<span class="fc" id="L19">	public RecipeBook() {</span>
+<span class="fc" id="L20">		recipeArray = new Vector&lt;Recipe&gt;();</span>
+<span class="fc" id="L21">	}</span>
+	
+	/**
+	 * Returns the recipe array.
+	 * @param r
+	 * @return Recipe[]
+	 */
+	public synchronized Vector&lt;Recipe&gt; getRecipes() {
+<span class="fc" id="L29">		return recipeArray;</span>
+	}
+	
+	private boolean recipeExists(Recipe r){
+<span class="fc bfc" id="L33" title="All 2 branches covered.">		for (Recipe recipe: recipeArray){</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">			if ((recipe.getAmtChocolate()==r.getAmtChocolate() &amp;&amp; </span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">					recipe.getAmtCoffee()==r.getAmtCoffee() &amp;&amp;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">					recipe.getAmtMilk()==r.getAmtMilk() &amp;&amp;</span>
+<span class="fc bfc" id="L37" title="All 4 branches covered.">					recipe.getAmtSugar()==r.getAmtSugar()) || recipe.getName().equals(r.getName()))</span>
+<span class="fc" id="L38">				return true;</span>
+		}
+<span class="fc" id="L40">		return false;</span>
+	}
+	
+	public synchronized boolean addRecipe(Recipe r) throws DuplicatedRecipeException, AmountOfRecipeException{
+		
+//Erro:	if (recipeArray.size() &gt; 3){
+<span class="fc bfc" id="L46" title="All 2 branches covered.">		if (recipeArray.size()&gt;=3){</span>
+//Erro: 	recipeArray.add(r);
+<span class="fc" id="L48">			throw new AmountOfRecipeException(&quot;Number of recipes exceeded&quot;);</span>
+		}
+	
+<span class="fc" id="L51">		boolean exists = recipeExists(r);</span>
+		
+		
+<span class="fc" id="L54">		boolean added = false;</span>
+		
+<span class="fc bfc" id="L56" title="All 2 branches covered.">		if (!exists) {</span>
+<span class="fc" id="L57">			recipeArray.add(r);</span>
+<span class="fc" id="L58">			added=true;</span>
+<span class="fc" id="L59">		}</span>
+		else
+		{
+<span class="fc" id="L62">			throw new DuplicatedRecipeException(&quot;Recipe already exists&quot;);</span>
+		}
+<span class="fc" id="L64">		return added;</span>
+	}
+
+	/**
+	 * Returns the name of the recipe deleted at the position specified
+	 * and null if the recipe does not exist.
+	 * @param recipeToDelete
+	 * @return String
+	 */
+	public synchronized boolean deleteRecipe(String recipeName) throws RecipeException {
+<span class="fc" id="L74">		int recipeToDelete = -1;</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">		for (int i=0; i&lt; recipeArray.size(); i++){</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">			if (recipeArray.get(i).getName().equals(recipeName)){</span>
+<span class="fc" id="L77">				recipeToDelete=i;				</span>
+			}				
+		}
+		
+//Erro:	if (recipeToDelete&gt;0){
+<span class="fc bfc" id="L82" title="All 2 branches covered.">		if (recipeToDelete&gt;=0){</span>
+<span class="fc" id="L83">			recipeArray.remove(recipeToDelete);</span>
+<span class="fc" id="L84">			return true;</span>
+		}
+		else {
+<span class="fc" id="L87">			throw new RecipeException(&quot;Unkown Recipe&quot;);</span>
+		}
+		
+	}
+	
+	
+	public synchronized Recipe getRecipe(String recipeName){		
+<span class="fc bfc" id="L94" title="All 2 branches covered.">		for (Recipe recipe: recipeArray)</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">			if (recipeName.equals(recipe.getName()))</span>
+<span class="fc" id="L96">				return recipe;</span>
+<span class="fc" id="L97">		return null;</span>
+	}
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span>AllTests (03/11/2015 13:48:24)</div></body></html>
