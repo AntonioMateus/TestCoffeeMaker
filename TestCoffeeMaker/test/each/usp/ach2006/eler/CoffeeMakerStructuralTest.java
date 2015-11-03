@@ -138,7 +138,7 @@ public class CoffeeMakerStructuralTest {
 	@Test (expected=InvalidValueException.class)
 	public void testaRetirarUmaUnidadeInventarioChocolate() throws InvalidValueException {
 		/* Classe de equivalencia: C8
-		 * Valor-limite: - */
+		 * Valor-limite: adiciona -1 no inventario de chocolate */
 		CM.addChocolateInventory(-1);
 	}
 	
@@ -149,7 +149,7 @@ public class CoffeeMakerStructuralTest {
 	@Test (expected=InvalidValueException.class)
 	public void testaRetirarUmaUnidadeInventarioCafe() throws InvalidValueException {
 		/* Classe de equivalencia: C5
-		 * Valor-limite: */
+		 * Valor-limite: adiciona -1 no inventario de cafe */
 		CM.addCoffeeInventory(-1);
 	}
 	
@@ -160,7 +160,7 @@ public class CoffeeMakerStructuralTest {
 	@Test (expected=InvalidValueException.class)
 	public void testaRetirarUmaUnidadeInventarioLeite() throws InvalidValueException {
 		/* Classe de equivalencia: C6
-		 * Valor-limite: */
+		 * Valor-limite: adiciona -1 no inventario de leite */
 		CM.addMilkInventory(-1);
 	}
 	
@@ -171,7 +171,7 @@ public class CoffeeMakerStructuralTest {
 	@Test (expected=InvalidValueException.class)
 	public void testaRetirarUmaUnidadeInventarioAcucar() throws InvalidValueException {
 		/* Classe de equivalencia: C7
-		 * Valor-limite: */
+		 * Valor-limite: adiciona -1 no inventario de acucar */
 		CM.addSugarInventory(-1);
 	}
 	
