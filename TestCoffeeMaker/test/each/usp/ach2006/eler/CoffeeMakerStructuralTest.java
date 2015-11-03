@@ -58,8 +58,8 @@ public class CoffeeMakerStructuralTest {
 	
 	@Test (expected=InvalidValueException.class) 
 	public void testaPagamentoMaiorQue500() throws InvalidValueException, DuplicatedRecipeException, AmountOfRecipeException, InventoryException, RecipeException, InsufficientAmountOfMoneyException  {
-		/* Classe de equivalencia: 
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C13, C14, C15, C16, C17, C18
+		 * Valor-limite: v3, v4, amtPaid = 501 */
 		CM.addRecipe(receitaValida1);
 		int troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), 501);
 		assertEquals(401,troco);
@@ -67,8 +67,8 @@ public class CoffeeMakerStructuralTest {
 	
 	@Test (expected=InvalidValueException.class) 
 	public void testaPagamentoNegativo() throws InvalidValueException, DuplicatedRecipeException, AmountOfRecipeException, InventoryException, RecipeException, InsufficientAmountOfMoneyException  {
-		/* Classe de equivalencia: 
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C13, C33, C15, C16, C17, C18
+		 * Valor-limite: v3, v4, amtPaid = -1 */
 		CM.addRecipe(receitaValida1);
 		int troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), -1);
 	}
@@ -108,7 +108,7 @@ public class CoffeeMakerStructuralTest {
 	
 	@Test (expected=InvalidValueException.class)
 	public void testaRetirarUmaUnidadeInventarioChocolate() throws InvalidValueException {
-		/* Classe de equivalencia: 
+		/* Classe de equivalencia: C8
 		 * Valor-limite: */
 		CM.addChocolateInventory(-1);
 	}
@@ -119,7 +119,7 @@ public class CoffeeMakerStructuralTest {
 	
 	@Test (expected=InvalidValueException.class)
 	public void testaRetirarUmaUnidadeInventarioCafe() throws InvalidValueException {
-		/* Classe de equivalencia: 
+		/* Classe de equivalencia: C5
 		 * Valor-limite: */
 		CM.addCoffeeInventory(-1);
 	}
@@ -130,7 +130,7 @@ public class CoffeeMakerStructuralTest {
 	
 	@Test (expected=InvalidValueException.class)
 	public void testaRetirarUmaUnidadeInventarioLeite() throws InvalidValueException {
-		/* Classe de equivalencia: 
+		/* Classe de equivalencia: C6
 		 * Valor-limite: */
 		CM.addMilkInventory(-1);
 	}
@@ -141,7 +141,7 @@ public class CoffeeMakerStructuralTest {
 	
 	@Test (expected=InvalidValueException.class)
 	public void testaRetirarUmaUnidadeInventarioAcucar() throws InvalidValueException {
-		/* Classe de equivalencia: 
+		/* Classe de equivalencia: C7
 		 * Valor-limite: */
 		CM.addSugarInventory(-1);
 	}
@@ -168,8 +168,8 @@ public class CoffeeMakerStructuralTest {
 	
 	@Test
 	public void testaInsereDuasReceitasComSegundaQuaseIgualAPrimeira() throws DuplicatedRecipeException, AmountOfRecipeException {
-		/* Classe de equivalencia:
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C13, C14, C15, C16, C17, C18
+		 * Valor-limite: - */
 		boolean ok = CM.addRecipe(receitaValida1);
 		ok = CM.addRecipe(receitaValidaQuaseIgualA1);
 		assertEquals(true,ok);
