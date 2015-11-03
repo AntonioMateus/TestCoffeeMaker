@@ -25,7 +25,7 @@ import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.RecipeException;
  */
 public class CoffeeMakerTest {
 	
-	/* Segundo especifica��o:
+	/* Segundo especificacao:
 	 * Na classe CoffeeMakerTest devem ser escritos os casos de teste para testar as opera��es para adicionar receita,
 	 * apagar receita, adicionar ingredientes, verificar quantidade de ingredientes, fazer caf� e obter receitas.
 	 */
