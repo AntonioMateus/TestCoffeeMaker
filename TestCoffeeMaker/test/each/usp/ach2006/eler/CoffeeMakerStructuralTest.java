@@ -1,9 +1,6 @@
 package each.usp.ach2006.eler;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Vector;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +22,7 @@ public class CoffeeMakerStructuralTest {
 	
 	/* Metodos a serem testados:
 	 * 
+	 * boolean addRecipe(Recipe r) throws InvalidValueException 
 	 *  
 	 * void addCoffeeInventory(int amtCoffee) throws InvalidValueException
 	 * 
@@ -41,11 +39,17 @@ public class CoffeeMakerStructuralTest {
 	
 	private CoffeeMaker CM;
 	private Recipe receitaValida1;
+	private Recipe receitaValida2;
+	private Recipe receitaValida3;
+	private Recipe receitaValida4;
 	
 	@Before
 	public void setUp() throws Exception {
 		CM = new CoffeeMaker();
 		receitaValida1 = new Recipe("Cafe",100,4,1,1,1);
+		receitaValida2 = new Recipe("Chocolate Quente",75,1,3,1,3);
+		receitaValida3 = new Recipe("Chocolate Frio",55,1,3,2,3);
+		receitaValida4 = new Recipe("Cafe Fraco",25,1,1,1,1);
 	}
 	
 	/* Testes para makeCoffee - INICIO */
@@ -65,6 +69,35 @@ public class CoffeeMakerStructuralTest {
 		 * Valor-limite: */
 		CM.addRecipe(receitaValida1);
 		int troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), -1);
+	}
+	
+	@Test (expected = InvalidValueException.class)
+	public void testaFazerCafeDinheiroNegativo() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+		/* Classe de equivalencia: C13, C33, C15, C16, C17, C18
+		 * Valor-limite: amtPaid < 0 */
+		
+		CM.addRecipe(receitaValida1);
+		int troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), -1);
+	}
+
+	@Test
+	public void testaFazerCafeConsumoInventario() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
+		/* Classe de equivalencia: C13, C14, C15, C16, C17, C18
+		 * Valor-limite: - */
+
+	    Recipe receitaUnitaria = new Recipe("Teste Unidades", 1, 1, 1, 1, 1);
+		int cafeInicial = CM.checkCoffeeInventory();
+		int leiteInicial = CM.checkMilkInventory();
+		int acucarInicial = CM.checkSugarInventory();
+		int chocolateInicial = CM.checkChocolateInventory();
+			
+		CM.addRecipe(receitaUnitaria);
+		CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
+			
+		assertEquals(cafeInicial-CM.getRecipes().get(0).getAmtCoffee(), CM.checkCoffeeInventory());
+		assertEquals(leiteInicial-CM.getRecipes().get(0).getAmtMilk(), CM.checkMilkInventory());
+		assertEquals(acucarInicial-CM.getRecipes().get(0).getAmtSugar(), CM.checkSugarInventory());
+		assertEquals(chocolateInicial-CM.getRecipes().get(0).getAmtChocolate(), CM.checkChocolateInventory());
 	}
 	
 	/* Testes para makeCoffee - FIM */
@@ -113,10 +146,23 @@ public class CoffeeMakerStructuralTest {
 	
 	/* Testes para addSugarInventory - FIM */
 	
+	/* Testes para addRecipe - INICIO*/
 	
-	
-	
-	
-	
-	
+	@Test
+	public void testaInsereQuatroReceitasEVerificaNumeroReceitasInseridas () throws DuplicatedRecipeException {
+		/* Classe de equivalencia: C20, C2, C3
+		 * Valor-limite: v19, v3, v4 */
+		try {
+			CM.addRecipe(receitaValida1);
+			CM.addRecipe(receitaValida2);
+			CM.addRecipe(receitaValida3);
+			CM.addRecipe(receitaValida4);
+		}
+		catch (AmountOfRecipeException a) {
+			int qntd = CM.getRecipes().size();
+			assertEquals(3, qntd);
+		}
+	}
+
+	/* Testes para addRecipe - FIM*/
 }
